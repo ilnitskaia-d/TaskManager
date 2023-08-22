@@ -7,24 +7,15 @@
     android:orientation="vertical"
     tools:context="com.example.taskmenager.ui.profile.ProfileFragment">
 
-    <androidx.cardview.widget.CardView
-        android:layout_marginVertical="16dp"
-        android:layout_marginHorizontal="36dp"
+    <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        app:cardCornerRadius="200dp"
-    >
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_launcher_background"
-            />
-
-    </androidx.cardview.widget.CardView>
-
+        android:src="@color/black"
+        android:id="@+id/img_profile"
+    />
     <EditText
+        android:id="@+id/et_name_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="UserName"

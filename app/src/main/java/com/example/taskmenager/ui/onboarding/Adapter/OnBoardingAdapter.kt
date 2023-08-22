@@ -32,9 +32,8 @@ class OnBoardingAdapter(private val onClick: () -> Unit): Adapter<OnBoardingAdap
         fun bind(onBoarding: OnBoarding) {
             binding.tvTitle.text = onBoarding.title
             binding.tvDesc.text = onBoarding.description
-            if(adapterPosition == list.lastIndex) {
-                binding.btnStart.isVisible = true
-            }
+            binding.btnStart.isVisible = adapterPosition == list.lastIndex
+
             binding.btnStart.setOnClickListener {
                 onClick()
             }
