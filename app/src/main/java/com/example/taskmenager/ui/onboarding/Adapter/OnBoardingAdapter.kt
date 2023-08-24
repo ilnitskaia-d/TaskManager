@@ -32,11 +32,13 @@ class OnBoardingAdapter(private val onClick: () -> Unit): Adapter<OnBoardingAdap
         fun bind(onBoarding: OnBoarding) {
             binding.tvTitle.text = onBoarding.title
             binding.tvDesc.text = onBoarding.description
-            binding.btnStart.isVisible = adapterPosition == list.lastIndex
 
-            binding.btnStart.setOnClickListener {
-                onClick()
-            }
+            binding.btnStart.isVisible = adapterPosition == list.lastIndex
+            binding.btnStart.setOnClickListener { onClick() }
+
+            binding.tvSkip.isVisible = adapterPosition != list.lastIndex
+            binding.tvSkip.setOnClickListener { onClick() }
+
             Glide.with(itemView.context).load(onBoarding.image).into(binding.ivBoard)
         }
     }

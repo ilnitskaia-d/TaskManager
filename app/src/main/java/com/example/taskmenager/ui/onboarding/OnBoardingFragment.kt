@@ -29,10 +29,6 @@ class OnBoardingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.viewPager.adapter = adapter
         binding.indicators.attachTo(binding.viewPager)
-
-        binding.btnSkip.setOnClickListener {
-            onClick()
-        }
     }
 
     private fun onClick() {
