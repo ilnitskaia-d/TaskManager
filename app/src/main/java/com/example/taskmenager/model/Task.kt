@@ -1,6 +1,13 @@
 package com.example.taskmenager.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.io.Serializable
 
-data class Task(val title: String, val description: String) : Serializable{
-}
+@Entity
+data class Task(
+    @PrimaryKey(autoGenerate = true)
+    val id:Int? = null,
+    val title: String,
+    val description: String
+) : Serializable

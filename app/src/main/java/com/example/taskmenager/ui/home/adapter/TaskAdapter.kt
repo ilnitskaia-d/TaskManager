@@ -16,6 +16,12 @@ class TaskAdapter: Adapter<TaskAdapter.TaskViewHolder>() {
         notifyItemChanged(0)
     }
 
+    fun addTasks(tasks: List<Task>)
+    {
+        list.clear()
+        list.addAll(tasks)
+        notifyDataSetChanged()
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         return TaskViewHolder(ItemTaskBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }

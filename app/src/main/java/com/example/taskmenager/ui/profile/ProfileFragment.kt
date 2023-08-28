@@ -2,10 +2,13 @@ package com.example.taskmenager.ui.profile
 
 import android.app.Activity.RESULT_OK
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.net.toUri
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
@@ -15,6 +18,7 @@ import com.example.taskmenager.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
+//    private val gallery = Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI)
 
     private val pref: Pref by lazy {
         Pref(requireContext())
@@ -23,9 +27,14 @@ class ProfileFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    private val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+        binding.imgProfile.setImageURI(uri)
+        pref.safeImg(uri)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -34,24 +43,15 @@ class ProfileFragment : Fragment() {
         binding.etNameProfile.addTextChangedListener {
             pref.saveName(binding.etNameProfile.text.toString())
         }
-
-        if(pref.getImg() != null)
-            binding.imgProfile.setImageURI(pref.getImg()?.toUri())
+        val imgUri: Uri? = pref.getImg()
+        if(imgUri != null) {
+            Log.d("debug", "got here!")
+//            context?.grantUriPermission("profile", imgUri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            binding.imgProfile.setImageURI(imgUri)
+        }
 
         binding.imgProfile.setOnClickListener {
-            val gallery = Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI)
-            startActivityForResult(gallery, pickImage)
-        }
-        //val b = s?.toByteArray()
-//        binding.imgProfile.setImageBitmap(BitmapFactory.decodeByteArray(b, 0, b?.size ?: 1))
-  //      pref.safeImg(binding.imgProfile.drawToBitmap().toString())
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if(resultCode == RESULT_OK && requestCode == pickImage) {
-            binding.imgProfile.setImageURI(data?.data)
-            pref.safeImg(data?.data)
+            getContent.launch("image/*")
         }
     }
 

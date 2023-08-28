@@ -3,6 +3,7 @@ package com.example.taskmenager.data.local
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.net.Uri
+import androidx.core.net.toUri
 
 class Pref(context : Context) {
 
@@ -20,8 +21,8 @@ class Pref(context : Context) {
         pref.edit().putString(IMG_KEY, img.toString()).apply()
     }
 
-    fun getImg(): String?{
-        return pref.getString(IMG_KEY, "")
+    fun getImg(): Uri?{
+        return Uri.parse(pref.getString(IMG_KEY, ""))
     }
 
     fun saveName(name : String) {
