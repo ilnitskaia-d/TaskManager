@@ -1,13 +1,15 @@
 package com.example.taskmenager.ui.home.adapter
 
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.taskmenager.databinding.ItemTaskBinding
 import com.example.taskmenager.model.Task
 
-class TaskAdapter: Adapter<TaskAdapter.TaskViewHolder>() {
+class TaskAdapter(private val onLongClick: (Task) -> Unit, private val onClick: (Task) -> Unit):
+    Adapter<TaskAdapter.TaskViewHolder>() {
 
     private val list: ArrayList<Task> = arrayListOf()
 
@@ -38,6 +40,10 @@ class TaskAdapter: Adapter<TaskAdapter.TaskViewHolder>() {
         fun bind(task : Task) {
             binding.tvTitle.text = task.title
             binding.tvDesc.text = task.description
+            itemView.setOnLongClickListener {
+                onLongClick(task)
+                false
+            }
         }
     }
 }

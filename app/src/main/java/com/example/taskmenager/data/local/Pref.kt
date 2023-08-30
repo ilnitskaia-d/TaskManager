@@ -21,8 +21,8 @@ class Pref(context : Context) {
         pref.edit().putString(IMG_KEY, img.toString()).apply()
     }
 
-    fun getImg(): Uri?{
-        return Uri.parse(pref.getString(IMG_KEY, ""))
+    fun getImg(): String?{
+        return pref.getString(IMG_KEY, "")
     }
 
     fun saveName(name : String) {

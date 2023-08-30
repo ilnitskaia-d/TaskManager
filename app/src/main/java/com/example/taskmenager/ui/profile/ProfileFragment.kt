@@ -13,12 +13,12 @@ import androidx.core.net.toUri
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.bumptech.glide.Glide
 import com.example.taskmenager.data.local.Pref
 import com.example.taskmenager.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
-//    private val gallery = Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI)
 
     private val pref: Pref by lazy {
         Pref(requireContext())
@@ -33,7 +33,7 @@ class ProfileFragment : Fragment() {
     }
 
     private val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-        binding.imgProfile.setImageURI(uri)
+        Glide.with(binding.imgProfile).load(uri).into(binding.imgProfile)
         pref.safeImg(uri)
     }
 
@@ -43,19 +43,9 @@ class ProfileFragment : Fragment() {
         binding.etNameProfile.addTextChangedListener {
             pref.saveName(binding.etNameProfile.text.toString())
         }
-        val imgUri: Uri? = pref.getImg()
-        if(imgUri != null) {
-            Log.d("debug", "got here!")
-//            context?.grantUriPermission("profile", imgUri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
-            binding.imgProfile.setImageURI(imgUri)
-        }
-
+        Glide.with(binding.imgProfile).load(pref.getImg()).into(binding.imgProfile)
         binding.imgProfile.setOnClickListener {
             getContent.launch("image/*")
         }
-    }
-
-    companion object {
-        const val pickImage = 100
     }
 }

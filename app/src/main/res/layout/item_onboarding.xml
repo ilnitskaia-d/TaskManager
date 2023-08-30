@@ -16,10 +16,11 @@
         android:padding="10dp"
         />
 
-    <ImageView
-        android:id="@+id/iv_board"
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/anim_board"
         android:layout_width="match_parent"
         android:layout_height="250dp"
+        app:lottie_loop="true"
         app:layout_constraintTop_toBottomOf="@id/tv_skip"
         android:scaleType="centerCrop"
         android:src="@color/black"
@@ -30,7 +31,7 @@
         android:layout_height="250dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_board"
+        app:layout_constraintTop_toBottomOf="@id/anim_board"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         >
