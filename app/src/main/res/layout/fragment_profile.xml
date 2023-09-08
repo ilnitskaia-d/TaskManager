@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context="com.example.taskmenager.ui.profile.ProfileFragment">
 
@@ -11,14 +10,17 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:src="@color/black"
+        android:src="@drawable/ic_photo_camera"
         android:id="@+id/img_profile"
+        android:layout_margin="48dp"
     />
     <EditText
         android:id="@+id/et_name_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="UserName"
+        android:textSize="24sp"
+        android:layout_margin="10dp"
         />
 
     <Space

@@ -8,6 +8,7 @@ import java.io.Serializable
 data class Task(
     @PrimaryKey(autoGenerate = true)
     val id:Int? = null,
-    val title: String,
-    val description: String
+    val title: String? = null,
+    val description: String? = null,
+    val isSuccess: Boolean = false
 ) : Serializable

@@ -19,7 +19,7 @@ import com.example.taskmenager.ui.task.TaskFragment
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
-    private val adapter = TaskAdapter(this::onLongClick, this::onClick)
+    private val adapter = TaskAdapter(this::onLongClick, this::onClick, this::onSuccess)
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -57,6 +57,11 @@ class HomeFragment : Fragment() {
 
     private fun onClick(task: Task) {
         findNavController().navigate(R.id.taskFragment, bundleOf(TASK_FOR_EDIT to task))
+    }
+
+    private fun onSuccess(task: Task) {
+        App.db.taskDao().update(task)
+        setData()
     }
 
     private fun setData() {
