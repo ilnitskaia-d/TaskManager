@@ -1,5 +1,6 @@
 package com.example.taskmenager.ui.home.adapter
 
+import android.graphics.Color
 import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -39,17 +40,17 @@ class TaskAdapter(private val onLongClick: (Task) -> Unit, private val onClick: 
 
     inner class TaskViewHolder(private val binding: ItemTaskBinding): ViewHolder(binding.root) {
         fun bind(task : Task) = with(binding) {
+            itemView.setBackgroundColor( if(adapterPosition % 2 == 0) Color.BLACK else Color.WHITE)
+            tvTitle.setTextColor( if(adapterPosition % 2 == 0) Color.WHITE else Color.BLACK)
+            tvDesc.setTextColor( if(adapterPosition % 2 == 0) Color.WHITE else Color.BLACK)
+
             tvTitle.text = task.title
             tvDesc.text = task.description
 
             checkbox.isChecked = task.isSuccess
-            if(task.isSuccess) {
-                tvTitle.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
-                tvDesc.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
-            } else {
-                tvTitle.paintFlags = 0
-                tvDesc.paintFlags = 0
-            }
+            tvTitle.paintFlags = if(task.isSuccess) Paint.STRIKE_THRU_TEXT_FLAG else 0
+            tvDesc.paintFlags = if(task.isSuccess) Paint.STRIKE_THRU_TEXT_FLAG else 0
+
             checkbox.setOnCheckedChangeListener { _, isSuccess ->
                 onSuccess(task.copy(isSuccess = isSuccess))
             }
