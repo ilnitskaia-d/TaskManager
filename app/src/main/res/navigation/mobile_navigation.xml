@@ -39,4 +39,14 @@
         android:name="com.example.taskmenager.ui.onboarding.OnBoardingFragment"
         android:label="fragment_onboarding"
         tools:layout="@layout/fragment_onboarding" />
+    <fragment
+        android:id="@+id/acceptFragment"
+        android:name="com.example.taskmenager.ui.auth.accept.AcceptFragment"
+        android:label="fragment_accept"
+        tools:layout="@layout/fragment_accept" />
+    <fragment
+        android:id="@+id/phoneFragment"
+        android:name="com.example.taskmenager.ui.auth.phone.PhoneFragment"
+        android:label="fragment_phone"
+        tools:layout="@layout/fragment_phone" />
 </navigation>
